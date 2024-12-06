@@ -20,3 +20,20 @@ export class AuthGuard implements CanActivate {
     }
   }
 }
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LoginGuard implements CanActivate {
+  constructor(private router: Router, private cookieService: CookieStorageService) {}
+
+  canActivate(): boolean {
+    const token = this.cookieService.getCookie(AUTH_TOKEN);
+    if (token) {
+      this.router.navigate(['/main']);
+      return false;
+    } else {
+      return true;
+    }
+  }
+}

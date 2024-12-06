@@ -19,7 +19,7 @@ import {Router} from "@angular/router";
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTabGroup, MatTab, TranslatePipe, MatSelect, FormsModule, MatOption],
   templateUrl: './sign-in.component.html',
-  styleUrl: './sign-in.component.css',
+  styleUrl: './sign-in.component.scss',
 })
 export class SignInComponent {
   loginForm = new FormGroup({

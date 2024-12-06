@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import {SignInComponent} from "./sign-in/sign-in.component";
-import {AuthGuard} from "./guards/auth.guard";
+import {AuthGuard, LoginGuard} from "./guards/auth.guard";
 
 export const appRoutes: Route[] = [
   {
@@ -10,7 +10,8 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'login',
-    component: SignInComponent
+    component: SignInComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'main',
@@ -21,6 +22,6 @@ export const appRoutes: Route[] = [
   {
     // This is a catch-all route for when the user enters an invalid URL
     path: '**',
-    redirectTo: '/login'
+    redirectTo: '/main'
   },
 ];

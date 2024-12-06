@@ -1,3 +1,27 @@
-<button mat-button (click)="signOut()">
-  dang xuat
-</button>
+<mat-toolbar color="primary">
+  <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h1>Responsive Material Sidenavigation</h1>
+</mat-toolbar>
+<mat-sidenav-container autosize>
+  <mat-sidenav [ngClass]="!isCollapsed ? 'expanded' : isMobile ? 'expanded' : 'collapsed'" mode="side" [mode]="isMobile ? 'over' : 'side'" [opened]="isMobile ? 'false' : 'true'" style="background-color: aquamarine">
+    <mat-nav-list>
+      <button mat-list-item
+              matTooltip="Dash board"
+              matTooltipPosition="right"
+      >
+        <span class="entry">
+          <mat-icon
+          >house</mat-icon>
+          <span *ngIf="!isCollapsed">Dashboard</span>
+        </span>
+      </button>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <h2>Content</h2>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

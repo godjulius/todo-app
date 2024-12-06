@@ -9,7 +9,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
   imports: [RouterModule, MatButtonModule, MatDividerModule, MatIconModule, TranslateModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   constructor(public translate: TranslateService) {
