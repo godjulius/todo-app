@@ -87,7 +87,7 @@ export class SignInComponent extends BaseComponent {
     console.log('Username:', username);
     console.log('Password:', password);
 
-    // Authenticate with an API or Google Firebase Auth
+    // todo: call api
   }
 
   changeLanguage(value: string) {
