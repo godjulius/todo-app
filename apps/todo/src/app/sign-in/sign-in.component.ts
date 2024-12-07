@@ -87,7 +87,7 @@ export class SignInComponent extends BaseComponent {
     console.log('Username:', username);
     console.log('Password:', password);
 
-    // todo: call api
+    // todo: call api sign up
   }
 
   changeLanguage(value: string) {
