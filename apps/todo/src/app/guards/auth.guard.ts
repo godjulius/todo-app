@@ -1,4 +1,3 @@
-// apps/todo/src/app/core/guards/auth.guard.ts
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { CookieStorageService } from '../core/services/cookie-storage.service';

@@ -11,17 +11,22 @@ import {HttpClient} from "@angular/common/http";
 import {BASE_URL} from "../core/constant/ApiConstant";
 import {CookieStorageService} from "../core/services/cookie-storage.service";
 import {AUTH_TOKEN} from "../core/constant/AppConstant";
-import {catchError} from "rxjs";
+import {catchError, finalize} from "rxjs";
 import {Router} from "@angular/router";
+import {MatIcon} from "@angular/material/icon";
+import {MatTooltip} from "@angular/material/tooltip";
+import {MatBottomSheet} from "@angular/material/bottom-sheet";
+import {LanguageSheetComponent} from "../pages/language-sheet/language-sheet.component";
+import {BaseComponent} from "../core/base.component";
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTabGroup, MatTab, TranslatePipe, MatSelect, FormsModule, MatOption],
+    imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatTabGroup, MatTab, TranslatePipe, MatSelect, FormsModule, MatOption, MatIcon, MatTooltip],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss',
 })
-export class SignInComponent {
+export class SignInComponent extends BaseComponent {
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
@@ -38,7 +43,9 @@ export class SignInComponent {
   httpClient = inject(HttpClient);
   cookieService = inject(CookieStorageService)
   router = inject(Router);
+  private bottomSheet = inject(MatBottomSheet)
   constructor() {
+    super();
     this.languages = this.translateService.getLangs();
   }
 
@@ -49,12 +56,16 @@ export class SignInComponent {
     const username = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
     console.log('Username:', username);
-    console.log('Password:', password)
+    console.log('Password:', password);
+    this.loadingService.startLoading()
     this.httpClient.post(`${BASE_URL}/sign-in`, {email: username, password: password})
       .pipe(
         catchError((error: any) => {
           console.log('Error in component: ', error);
           return error;
+        }),
+        finalize(() => {
+          this.loadingService.stopLoading();
         })
       )
       .subscribe((response: unknown) => {
@@ -81,6 +92,11 @@ export class SignInComponent {
 
   changeLanguage(value: string) {
     this.translateService.use(value)
+  }
+
+  openLanguageSheet() {
+      this.bottomSheet.open(LanguageSheetComponent);
+
   }
 }
 

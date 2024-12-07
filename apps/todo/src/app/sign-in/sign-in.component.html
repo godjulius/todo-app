@@ -126,14 +126,23 @@
           </mat-tab>
         </mat-tab-group>
         <div class="d-flex justify-content-center align-items-center">
-          <mat-form-field>
-            <mat-label>Selected language</mat-label>
-            <mat-select [(ngModel)]="selectedLanguage" name="food" (valueChange)="changeLanguage($event)">
-              @for (lan of languages; track lan) {
-                <mat-option [value]="lan">{{ lan }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
+<!--          <mat-form-field>-->
+<!--            <mat-label>Selected language</mat-label>-->
+<!--            <mat-select [(ngModel)]="selectedLanguage" name="food" (valueChange)="changeLanguage($event)">-->
+<!--              @for (lan of languages; track lan) {-->
+<!--                <mat-option [value]="lan">{{ lan }}</mat-option>-->
+<!--              }-->
+<!--            </mat-select>-->
+<!--          </mat-form-field>-->
+          <button
+            mat-icon-button
+            aria-label="Translate icon"
+            (click)="openLanguageSheet()"
+            matTooltip="Change Language"
+            matTooltipPosition="below"
+          >
+            <mat-icon>translate</mat-icon>
+          </button>
         </div>
       </div>
     </div>

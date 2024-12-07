@@ -6,21 +6,21 @@ import {Injectable} from '@angular/core';
 export class CookieStorageService {
   constructor() {}
   // Các hàm cookie
-  updateCookie(name: string, value: string, years: number) {
+  updateCookie(name: string, value: string, days: number) {
     const cookie = this.getCookie(name);
     if (cookie) {
       const date = new Date();
-      date.setTime(date.getTime() + years * 365 * 86400000); // thiết lập thời gian hết hạn
+      date.setTime(date.getTime() + days * 86400000); // thiết lập thời gian hết hạn
       const expires = 'expires=' + date.toUTCString();
       document.cookie = name + '=' + value + ';' + expires + '; path=/;';
     } else {
-      this.setCookie(name, value, years); // thiết lập cookie mới
+      this.setCookie(name, value, days); // thiết lập cookie mới
     }
   }
 
-  setCookie(name: string, value: string, years: number) {
+  setCookie(name: string, value: string, days: number) {
     const date = new Date();
-    date.setTime(date.getTime() + years * 365 * 86400000);
+    date.setTime(date.getTime() + days * 86400000);
     const expires = 'expires=' + date.toUTCString();
     document.cookie = name + '=' + value + ';' + expires + ';path=/';
   }
